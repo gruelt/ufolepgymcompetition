@@ -15,13 +15,13 @@ class OldClub extends Model
 
     // retrieving gymnasts
 
-    public function gymnastes(){
+    public function oldGymnastes(){
         return $this->hasMany(OldGymnaste::class,'clubG','codeClub');
     }
 
     // Retrievieng relations teams.
 
-    public function equipes(){
+    public function oldEquipes(){
         return $this->hasMany(OldEquipe::class,'idClub');
     }
 }

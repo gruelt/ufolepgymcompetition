@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\OldEquipe;
 use Illuminate\Http\Request;
 
-class EquipeController extends Controller
+class OldEquipeController extends Controller
 {
     /**
      * Display a listing of the resource.

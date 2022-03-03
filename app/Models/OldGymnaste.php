@@ -15,11 +15,11 @@ class OldGymnaste extends Model
 
     protected $keyType = 'string';
 
-    public function club(){
+    public function oldClub(){
         return $this->belongsTo(OldClub::class,'clubG','codeClub');
     }
 
-    public function equipes(){
+    public function oldEquipes(){
         return $this->belongsToMany(OldEquipe::class,'compet_composer','licenceG','numEquipe');
     }
 }

@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\OldCompetition;
+use App\Models\Gymnaste;
 use Illuminate\Http\Request;
 
-class CompetitionController extends Controller
+class OldGymnasteController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -41,10 +41,10 @@ class CompetitionController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\OldCompetition  $competition
+     * @param  \App\Models\Gymnaste  $gymnaste
      * @return \Illuminate\Http\Response
      */
-    public function show(OldCompetition $competition)
+    public function show(Gymnaste $gymnaste)
     {
         //
     }
@@ -52,10 +52,10 @@ class CompetitionController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\OldCompetition  $competition
+     * @param  \App\Models\Gymnaste  $gymnaste
      * @return \Illuminate\Http\Response
      */
-    public function edit(OldCompetition $competition)
+    public function edit(Gymnaste $gymnaste)
     {
         //
     }
@@ -64,10 +64,10 @@ class CompetitionController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\OldCompetition  $competition
+     * @param  \App\Models\Gymnaste  $gymnaste
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, OldCompetition $competition)
+    public function update(Request $request, Gymnaste $gymnaste)
     {
         //
     }
@@ -75,10 +75,10 @@ class CompetitionController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\OldCompetition  $competition
+     * @param  \App\Models\Gymnaste  $gymnaste
      * @return \Illuminate\Http\Response
      */
-    public function destroy(OldCompetition $competition)
+    public function destroy(Gymnaste $gymnaste)
     {
         //
     }
