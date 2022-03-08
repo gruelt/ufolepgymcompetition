@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\OldCompetition;
+use App\Models\Competition;
 use Illuminate\Http\Request;
 
-class OldCompetitionController extends Controller
+class CompetitionController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,9 +14,7 @@ class OldCompetitionController extends Controller
      */
     public function index()
     {
-        $oldCompetitions = OldCompetition::all()->load('oldEquipes');
 
-        return view('pages.old-competitions.old-competitions-index',compact('oldCompetitions'));
     }
 
     /**
@@ -43,10 +41,10 @@ class OldCompetitionController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\OldCompetition  $competition
+     * @param  \App\Models\Competition  $competition
      * @return \Illuminate\Http\Response
      */
-    public function show(OldCompetition $competition)
+    public function show(Competition $competition)
     {
         //
     }
@@ -54,10 +52,10 @@ class OldCompetitionController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\OldCompetition  $competition
+     * @param  \App\Models\Competition  $competition
      * @return \Illuminate\Http\Response
      */
-    public function edit(OldCompetition $competition)
+    public function edit(Competition $competition)
     {
         //
     }
@@ -66,10 +64,10 @@ class OldCompetitionController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\OldCompetition  $competition
+     * @param  \App\Models\Competition  $competition
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, OldCompetition $competition)
+    public function update(Request $request, Competition $competition)
     {
         //
     }
@@ -77,10 +75,10 @@ class OldCompetitionController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\OldCompetition  $competition
+     * @param  \App\Models\Competition  $competition
      * @return \Illuminate\Http\Response
      */
-    public function destroy(OldCompetition $competition)
+    public function destroy(Competition $competition)
     {
         //
     }

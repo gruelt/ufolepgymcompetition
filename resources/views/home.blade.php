@@ -13,8 +13,9 @@
                             {{ session('status') }}
                         </div>
                     @endif
+                        <b-button block href="/old-competitions">Import Competitions</b-button>
+                        <b-button block href="/competitions">Competitions</b-button>
 
-                    {{ __('You are logged in!') }}
                 </div>
             </div>
         </div>
