@@ -2,18 +2,22 @@
 
 @section('content')
 
-    <b-row v-for="compet in {{json_encode($oldCompetitions)}}"  >
+    <b-table hover :items="{{json_encode($oldCompetitions)}}">
 
-        <b-col >
-            <b-link :href="'/old-competitions/'+compet.numCompet" >
-                <b-col v-html="compet.lieuCompet" ></b-col>
-            </b-link>
-        </b-col>
+        <template #cell(numCompet)="row">
+
+            <b-button  size="sm" :href="'old-competitions/'+ row.item.numCompet + '/import'">
+                @{{ row.item.numCompet }} Importer
+            </b-button>
+        </template>
+
+        <template #cell(old_equipes)="row">
+            @{{ row.item.old_equipes.length }}
+        </template>
+
+    </b-table>
 
 
-
-
-    </b-row>
 
 
 

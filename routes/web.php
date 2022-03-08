@@ -24,3 +24,5 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::resource('competitions',\App\Http\Controllers\CompetitionController::class);
 
 Route::resource('old-competitions',\App\Http\Controllers\OldCompetitionController::class);
+
+Route::get('old-competitions/{id}/import','App\Http\Controllers\OldCompetitionController@import')->name('oldcompetition.import');

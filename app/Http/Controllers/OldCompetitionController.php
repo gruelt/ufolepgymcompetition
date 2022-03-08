@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\OldCompetition;
+use App\Services\OldCompetitionService;
 use Illuminate\Http\Request;
 
 class OldCompetitionController extends Controller
@@ -83,5 +84,13 @@ class OldCompetitionController extends Controller
     public function destroy(OldCompetition $competition)
     {
         //
+    }
+
+    public function import($oldCompetitionId)
+    {
+        print $oldCompetitionId;
+        $oldCompetition = OldCompetition::find($oldCompetitionId);
+        $oldCompetitionService = new OldCompetitionService($oldCompetition);
+        $oldCompetitionService->import();
     }
 }

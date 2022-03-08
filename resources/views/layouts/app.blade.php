@@ -72,7 +72,7 @@
 
 
 
-        <b-container fluid>
+        <b-container >
             @yield('content')
         </b-container>
     </div>
