@@ -1,18 +1,22 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-12">
-            <div class="card">
-                <div class="card-header">{{ __('Compétitions Saisies sur UfolepGym') }}</div>
 
-                <div class="card-body">
-                    @if (session('status'))
-                    <div class="alert alert-success" role="alert">
-                        {{ session('status') }}
-                    </div>
-                    @endif
+    <b-row v-for="compet in {{json_encode($oldCompetitions)}}"  >
+
+        <b-col >
+            <b-link :href="'/old-competitions/'+compet.numCompet" >
+                <b-col v-html="compet.lieuCompet" ></b-col>
+            </b-link>
+        </b-col>
+
+
+
+
+    </b-row>
+
+
+
                     <table>
                     @foreach($oldCompetitions as $compet)
                         <tr>
@@ -30,9 +34,5 @@
 
                         {{$oldCompetitions}}
 
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+
 @endsection
