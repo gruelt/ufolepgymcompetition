@@ -13,13 +13,20 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('teams', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('user_id')->index();
+
+        Schema::create('categories', function (Blueprint $table) {
+            $table->increments('id');
             $table->string('name');
-            $table->boolean('personal_team');
+            $table->string('description');
+            $table->integer('age_min');
+            $table->integer('age_max');
+            $table->boolean('active')->default(true);
             $table->timestamps();
+
+            $table->foreignId('genre_id');
+
         });
+
     }
 
     /**
@@ -29,6 +36,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('teams');
+        Schema::dropIfExists('categories');
     }
 };

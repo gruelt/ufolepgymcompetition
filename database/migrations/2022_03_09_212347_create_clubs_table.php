@@ -13,14 +13,15 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('team_user', function (Blueprint $table) {
+        Schema::create('clubs', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('team_id');
-            $table->foreignId('user_id');
-            $table->string('role')->nullable();
+            $table->string('nom');
+            $table->string('ville');
+            $table->string('mail');
+            $table->integer('departement');
+            $table->integer('code')->nullable();
+            $table->integer('old_idClub')->nullable();
             $table->timestamps();
-
-            $table->unique(['team_id', 'user_id']);
         });
     }
 
@@ -31,6 +32,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('team_user');
+        Schema::dropIfExists('clubs');
     }
 };

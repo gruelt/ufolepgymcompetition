@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\OldCompetition;
-use App\Services\ImportService;
+use App\Models\Genre;
 use Illuminate\Http\Request;
 
-class OldCompetitionController extends Controller
+class GenreController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,9 +14,7 @@ class OldCompetitionController extends Controller
      */
     public function index()
     {
-        $oldCompetitions = OldCompetition::all()->load('oldEquipes');
-
-        return view('pages.old-competitions.old-competitions-index',compact('oldCompetitions'));
+        //
     }
 
     /**
@@ -44,10 +41,10 @@ class OldCompetitionController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\OldCompetition  $competition
+     * @param  \App\Models\Genre  $genre
      * @return \Illuminate\Http\Response
      */
-    public function show(OldCompetition $competition)
+    public function show(Genre $genre)
     {
         //
     }
@@ -55,10 +52,10 @@ class OldCompetitionController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\OldCompetition  $competition
+     * @param  \App\Models\Genre  $genre
      * @return \Illuminate\Http\Response
      */
-    public function edit(OldCompetition $competition)
+    public function edit(Genre $genre)
     {
         //
     }
@@ -67,10 +64,10 @@ class OldCompetitionController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\OldCompetition  $competition
+     * @param  \App\Models\Genre  $genre
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, OldCompetition $competition)
+    public function update(Request $request, Genre $genre)
     {
         //
     }
@@ -78,19 +75,11 @@ class OldCompetitionController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\OldCompetition  $competition
+     * @param  \App\Models\Genre  $genre
      * @return \Illuminate\Http\Response
      */
-    public function destroy(OldCompetition $competition)
+    public function destroy(Genre $genre)
     {
         //
-    }
-
-    public function import($oldCompetitionId)
-    {
-        print $oldCompetitionId;
-        $oldCompetition = OldCompetition::find($oldCompetitionId);
-        $ImportService = new ImportService($oldCompetition);
-        $ImportService->import();
     }
 }
