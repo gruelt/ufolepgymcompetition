@@ -15,7 +15,7 @@ return new class extends Migration
     {
 
         Schema::create('categories', function (Blueprint $table) {
-            $table->increments('id');
+            $table->id();
             $table->string('name');
             $table->string('description');
             $table->integer('age_min');
@@ -23,7 +23,6 @@ return new class extends Migration
             $table->boolean('active')->default(true);
             $table->timestamps();
 
-            $table->foreignId('genre_id');
 
         });
 

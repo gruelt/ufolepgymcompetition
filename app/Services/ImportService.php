@@ -4,7 +4,10 @@ namespace App\Services;
 
 use App\Models\Categorie;
 use App\Models\Club;
+use App\Models\Competition;
+use App\Models\Equipe;
 use App\Models\Genre;
+use App\Models\Niveau;
 use App\Models\OldCompetition;
 
 class ImportService
@@ -29,12 +32,37 @@ class ImportService
 
         public function importCompetition()
         {
+            $competition = Competition::where('old_numCompet',$this->oldCompetition->numCompet);
+
+            $competitiondata = [
+                'old_numCompet' => $this->oldCompetition->numCompet,
+                'type' => $this->oldCompetition->typeCompet,
+                'ville' => $this->oldCompetition->lieuCompet,
+                'departement' => $this->oldCompetition->depCompet,
+                'old_date' => $this->oldCompetition->dateCompet,
+                'niveau_gaf' => $this->oldCompetition->niveauxGaf,
+                'niveau_gam' => $this->oldCompetition->niveauxGam,
+            ];
+
+            if($competition->count() > 0)
+            {
+                $competition->first();
+                $competition->update($competitiondata);
+            }
+            else{
+                $competition = new Competition;
+                $competition->fill($competitiondata);
+                $competition->save();
+            }
+
+
+
 
 
             foreach($this->oldCompetition->oldEquipes()->get() as $oldEquipe)
             {
                 print "<hr>".$oldEquipe;
-                $this->importEquipe($oldEquipe);
+                $this->importEquipe($oldEquipe,$competition->first());
             }
 
 
@@ -42,16 +70,46 @@ class ImportService
 
 
 
-        public function importEquipe($oldEquipe)
+        public function importEquipe($oldEquipe,$competition)
         {
             $oldClub = $oldEquipe->oldClub()->first();
 
-            //Import Club / update
-            $club_id = $this->importClub($oldClub);
 
-            //print $oldEquipe->cate;
-            $this->importCategorie($oldEquipe->sexe, $oldEquipe->cate);
+            $club = $this->importClub($oldClub);
 
+            $categorie = $this->importCategorie($oldEquipe->sexe, $oldEquipe->cate);
+
+            $niveau = $this->importNiveau($oldEquipe->niveau);
+
+            $genre = Genre::where('description',$oldEquipe->sexe)->first();
+
+
+
+
+            $equipe = Equipe::where('old_numEquipe',$oldEquipe->numEquipe);
+
+            if($equipe->count() > 0)
+            {
+                $equipe = $equipe->first();
+            }
+            else{
+
+                $equipe = new Equipe;
+
+
+            }
+
+            $equipe->name = $club->nom ."-".$oldEquipe->numeroEquipe;
+            $equipe->individuel = $oldEquipe->indiv;
+            $equipe->finalite = $oldEquipe->finalite;
+            $equipe->club_id = $club->id;
+            $equipe->genre_id = $genre->id;
+            $equipe->niveau_id = $niveau->id;
+            $equipe->categorie_id = $categorie->id;
+            $equipe->old_numEquipe = $oldEquipe->numEquipe;
+            $equipe->competition_id = $competition->id;
+
+                $equipe->save();
 
 
         }
@@ -75,21 +133,17 @@ class ImportService
 
             $club->save();
 
-            return $club->id;
+            return $club;
 
         }
 
         public function importCategorie($oldgenre,$oldcategorie)
         {
-            $genre = Genre::where('description',$oldgenre)->first();
 
-//            $categorie = Categorie::firstOrNew(
-//                            ['genre_id' => $genre->id],
-//                            ['description' => $oldcategorie]
-//            );
 
-            $categorie = Categorie::where('genre_id',$genre->id)
-                            ->where('description',$oldcategorie);
+
+
+            $categorie = Categorie::where('description',$oldcategorie);
 
             if($categorie->count() > 0)
             {
@@ -112,7 +166,7 @@ class ImportService
                 $name=$age_min."-".$age_max;
             }
 
-            $categorie->genre_id = $genre->id;
+
             $categorie->description = $oldcategorie;
             $categorie->name = $name;
             $categorie->age_min = $age_min;
@@ -120,6 +174,35 @@ class ImportService
 
 
             $categorie->save();
+
+            return $categorie;
+
+        }
+
+
+
+        public function importNiveau($oldniveau)
+        {
+            $niveau = Niveau::where('description',$oldniveau);
+
+
+            if($niveau->count() > 0)
+            {
+                $niveau = $niveau->first();
+            }
+            else{
+                $niveau = new Niveau;
+                $niveau->name = $oldniveau;
+                $niveau->description = $oldniveau;
+
+
+            }
+
+
+
+            $niveau->save();
+
+            return $niveau;
 
 
         }

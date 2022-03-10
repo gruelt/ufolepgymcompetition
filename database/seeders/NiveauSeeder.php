@@ -7,14 +7,12 @@ use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use JeroenZwart\CsvSeeder\CsvSeeder;
 
-
-class GenreSeeder extends CsvSeeder
+class NiveauSeeder extends CsvSeeder
 {
-
     public function __construct()
     {
-        $this->file = '/database/seeders/csv/GenreSeeder.csv';
-        $this->tablename = 'genres';
+        $this->file = '/database/seeders/csv/NiveauSeeder.csv';
+        $this->tablename = 'niveaux';
         $this->delimiter = ',';
     }
 
@@ -31,7 +29,5 @@ class GenreSeeder extends CsvSeeder
         DB::table($this->tablename)->truncate();
         parent::run();
         DB::statement('SET FOREIGN_KEY_CHECKS = 1');
-
     }
-
 }
