@@ -9,6 +9,9 @@ class OldJuge extends Model
 {
     use HasFactory;
 
+    protected $connection = 'mysql_ufolep';
+
+
     protected $table = "compet_juges";
 
     protected $primaryKey="idJuge";

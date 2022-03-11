@@ -7,19 +7,30 @@ use App\Models\Club;
 use App\Models\Competition;
 use App\Models\Equipe;
 use App\Models\Genre;
+use App\Models\Gymnaste;
 use App\Models\Niveau;
 use App\Models\OldCompetition;
+use App\Models\Saison;
 
 class ImportService
 {
         public $oldCompetitionId;
+        public $debug;
+        public $saison;
 
         public function __construct($oldCompetition)
         {
 
             $this->oldCompetition = $oldCompetition;
+            $this->debug = true;
+            $this->saison = Saison::where('actuelle',1)->first();
+        }
 
-
+        public function log($data,$color="black")
+        {
+            if($this->debug) {
+                print "<font color=$color>".$data."</font>";
+            }
         }
 
         public function import()
@@ -32,6 +43,9 @@ class ImportService
 
         public function importCompetition()
         {
+
+
+
             $competition = Competition::where('old_numCompet',$this->oldCompetition->numCompet);
 
             $competitiondata = [
@@ -42,17 +56,24 @@ class ImportService
                 'old_date' => $this->oldCompetition->dateCompet,
                 'niveau_gaf' => $this->oldCompetition->niveauxGaf,
                 'niveau_gam' => $this->oldCompetition->niveauxGam,
+                'saison_id' => $this->saison->id
             ];
+
+            $this->log("Competition : ". $competitiondata['ville'] . $competitiondata['old_date']);
 
             if($competition->count() > 0)
             {
                 $competition->first();
                 $competition->update($competitiondata);
+
+                $this->log('UPDATE',"green");
             }
             else{
                 $competition = new Competition;
                 $competition->fill($competitiondata);
                 $competition->save();
+
+                $this->log('Import',"orange");
             }
 
 
@@ -61,8 +82,27 @@ class ImportService
 
             foreach($this->oldCompetition->oldEquipes()->get() as $oldEquipe)
             {
-                print "<hr>".$oldEquipe;
-                $this->importEquipe($oldEquipe,$competition->first());
+
+                $equipe = $this->importEquipe($oldEquipe,$competition->first());
+
+                foreach ($oldEquipe->oldGymnastes()->get() as $oldGymnaste)
+                {
+
+
+                    $gymnaste = $this->importGymnaste($oldGymnaste,$equipe);
+
+
+
+                    if($gymnaste->clubs()->wherePivot('club_id',$equipe->club_id)->wherePivot('saison_id',$this->saison->id)->count() <= 0 )
+                    {
+                        $gymnaste->clubs()->attach($equipe->club_id, ['saison_id' => $this->saison->id]);
+                    }
+
+                    $gymnaste->equipes()->syncWithoutDetaching($equipe->id);
+
+                }
+
+
             }
 
 
@@ -72,8 +112,12 @@ class ImportService
 
         public function importEquipe($oldEquipe,$competition)
         {
+
+
+
             $oldClub = $oldEquipe->oldClub()->first();
 
+            $this->log('<br><br>>>Equipe : ' .$oldClub->nomClub."-".$oldEquipe->sexe . " ".$oldEquipe->niveau ." ".$oldEquipe->cate ."-".$oldEquipe->numeroEquipe);
 
             $club = $this->importClub($oldClub);
 
@@ -90,6 +134,7 @@ class ImportService
 
             if($equipe->count() > 0)
             {
+                $this->log('<br> Equipe :update','green');
                 $equipe = $equipe->first();
             }
             else{
@@ -109,8 +154,40 @@ class ImportService
             $equipe->old_numEquipe = $oldEquipe->numEquipe;
             $equipe->competition_id = $competition->id;
 
-                $equipe->save();
+            $equipe->save();
 
+            return $equipe;
+
+        }
+
+        public function importGymnaste($oldgymnaste,$equipe)
+        {
+                $gymnaste = Gymnaste::where('licence',$oldgymnaste->licenceG);
+
+                $this->log("<br>".$oldgymnaste->nomG." ".$oldgymnaste->prenomG,"black");
+
+                if($gymnaste->count() > 0)
+                {
+                    $gymnaste = $gymnaste->first();
+                    $this->log('UPDATE','green');
+                }
+                else{
+                    $gymnaste = new Gymnaste();
+                    $this->log('NEW','orange');
+
+                }
+
+                $gymnaste->nom = $oldgymnaste->nomG;
+                $gymnaste->prenom = $oldgymnaste->prenomG;
+                $gymnaste->annee = $oldgymnaste->anneeG;
+                $gymnaste->licence = $oldgymnaste->licenceG;
+                $gymnaste->genre_id = $equipe->genre_id;
+
+                $gymnaste->save();
+
+
+
+                 return $gymnaste;
 
         }
 
@@ -147,10 +224,12 @@ class ImportService
 
             if($categorie->count() > 0)
             {
+                $this->log('<br> Categorie :update','green');
                 $categorie = $categorie->first();
             }
             else{
                 $categorie = new Categorie;
+                $this->log('<br> Categorie :New','orange');
             }
 
             if(str_contains($oldcategorie,'+'))
@@ -189,8 +268,10 @@ class ImportService
             if($niveau->count() > 0)
             {
                 $niveau = $niveau->first();
+                $this->log("<br> Niveau: $oldniveau" ,"green");
             }
             else{
+                $this->log("<br>Nouveau Niveau: $oldniveau" ,"orange");
                 $niveau = new Niveau;
                 $niveau->name = $oldniveau;
                 $niveau->description = $oldniveau;

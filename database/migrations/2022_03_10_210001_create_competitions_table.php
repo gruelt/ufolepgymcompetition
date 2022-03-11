@@ -24,6 +24,7 @@ return new class extends Migration
             $table->date('date_fin')->nullable();
             $table->string('niveau_gaf')->nullable();
             $table->string('niveau_gam')->nullable();
+            $table->foreignId('saison_id')->constrained();
 
             $table->timestamps();
         });

@@ -18,6 +18,7 @@ class Competition extends Model
         'niveau_gaf',
         'niveau_gam',
         'date_debut',
-        'date_fin'
+        'date_fin',
+        'saison_id'
     ];
 }

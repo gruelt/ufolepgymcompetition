@@ -9,6 +9,8 @@ class OldCompetition extends Model
 {
     use HasFactory;
 
+    protected $connection = 'mysql_ufolep';
+
     protected $table = "compet_competition";
 
     protected $primaryKey = "numCompet";

@@ -9,6 +9,8 @@ class OldGymnaste extends Model
 {
     use HasFactory;
 
+    protected $connection = 'mysql_ufolep';
+
     protected $table = 'compet_gymnastes';
 
     protected $primaryKey = 'licenceG';
