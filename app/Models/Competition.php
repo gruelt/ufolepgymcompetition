@@ -21,4 +21,8 @@ class Competition extends Model
         'date_fin',
         'saison_id'
     ];
+
+    public function equipes(){
+        return $this->hasMany(Equipe::class);
+    }
 }

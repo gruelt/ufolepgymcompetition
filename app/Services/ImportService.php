@@ -63,8 +63,9 @@ class ImportService
 
             if($competition->count() > 0)
             {
-                $competition->first();
+                $competition = $competition->first();
                 $competition->update($competitiondata);
+
 
                 $this->log('UPDATE',"green");
             }
@@ -72,8 +73,9 @@ class ImportService
                 $competition = new Competition;
                 $competition->fill($competitiondata);
                 $competition->save();
+                $competition->first();
 
-                $this->log('Import',"orange");
+                $this->log('Import' .$competition->id,"orange");
             }
 
 
@@ -83,7 +85,7 @@ class ImportService
             foreach($this->oldCompetition->oldEquipes()->get() as $oldEquipe)
             {
 
-                $equipe = $this->importEquipe($oldEquipe,$competition->first());
+                $equipe = $this->importEquipe($oldEquipe,$competition);
 
                 foreach ($oldEquipe->oldGymnastes()->get() as $oldGymnaste)
                 {
@@ -113,7 +115,7 @@ class ImportService
         public function importEquipe($oldEquipe,$competition)
         {
 
-
+            $this->log('Old competition Id'. $competition->id ,'red');
 
             $oldClub = $oldEquipe->oldClub()->first();
 

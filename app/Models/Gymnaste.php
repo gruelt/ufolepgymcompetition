@@ -16,5 +16,11 @@ class Gymnaste extends Model
     public function equipes(){
         return $this->belongsToMany(Equipe::class);
     }
+    public function notes(){
+        return $this->belongsToMany(AgresCompetitionGymnaste::class);
+    }
+
+
+
 
 }
