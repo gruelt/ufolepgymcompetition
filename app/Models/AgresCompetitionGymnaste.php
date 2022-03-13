@@ -8,4 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class AgresCompetitionGymnaste extends Model
 {
     use HasFactory;
+
+    protected $table="agres_competition_gymnaste";
 }

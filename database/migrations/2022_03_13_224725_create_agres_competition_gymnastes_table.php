@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('agres_competition_gymnastes', function (Blueprint $table) {
+        Schema::create('agres_competition_gymnaste', function (Blueprint $table) {
             $table->id();
             $table->foreignId('gymnaste_id')->constrained();
             $table->foreignId('agres_id')->constrained();
@@ -29,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('agres_competition_gymnastes');
+        Schema::dropIfExists('agres_competition_gymnaste');
     }
 };
