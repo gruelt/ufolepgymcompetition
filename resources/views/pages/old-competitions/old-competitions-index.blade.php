@@ -7,7 +7,7 @@
 
 
 <div id="app">
-    <example-component></example-component>
+
     <b-table hover :items="{{json_encode($oldCompetitions)}}">
 
         <template #cell(numCompet)="row">
