@@ -19,6 +19,8 @@ class OldCompetition extends Model
         return $this->belongsToMany(OldEquipe::class,'compet_participer','numCompet','numEquipe');
     }
 
+
+
     public function oldJuges(){
         return $this->belongsToMany(OldJuge::class,'compet_jugement','numCompet','idJuge')
             ->withPivot([

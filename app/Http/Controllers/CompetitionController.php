@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Competition;
+use App\Models\OldCompetition;
 use Illuminate\Http\Request;
 
 class CompetitionController extends Controller
@@ -14,7 +15,9 @@ class CompetitionController extends Controller
      */
     public function index()
     {
-        //
+        $competitions = Competition::all()->load('equipes');
+
+        return view('pages.competitions.index',compact('competitions'));
     }
 
     /**
@@ -46,7 +49,9 @@ class CompetitionController extends Controller
      */
     public function show(Competition $competition)
     {
-        //
+        $competition = $competition->load('equipes.gymnastes');
+
+        return view('pages.competitions.show',compact('competition'));
     }
 
     /**

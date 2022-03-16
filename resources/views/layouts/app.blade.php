@@ -31,14 +31,20 @@
 
         <div class="main-content">
             @include('layouts.navbars.navbar')
-            @yield('content')
+
+
+
+                            @yield('content')
+
+
+
         </div>
 
         @guest()
             @include('layouts.footers.guest')
         @endguest
 
-        <script src="{{ asset('argon') }}/vendor/jquery/dist/jquery.min.js"></script>
+       <script src="{{ asset('argon') }}/vendor/jquery/dist/jquery.min.js"></script>
         <script src="{{ asset('argon') }}/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 
         @stack('js')
