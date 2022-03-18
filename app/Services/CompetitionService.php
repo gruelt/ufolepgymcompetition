@@ -52,5 +52,10 @@ class CompetitionService
         return $equipes;
     }
 
+    public static function categorieNiveau(Competition $competition)
+    {
+
+    }
+
 
 }

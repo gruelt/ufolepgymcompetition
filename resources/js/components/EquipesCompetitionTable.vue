@@ -15,8 +15,11 @@
                             <b-button @click="getEquipes">Refresh equipes</b-button>
                         </div>
                         <!-- Light table -->
-                        <div class="table-responsive">
-                            <table class="table align-items-center table-flush">
+<!--                        <div class="table-responsive table-sm">-->
+<!--                            <table class="table align-items-center table-flush">-->
+                            <div class="table-responsive py-4">
+                                <table class="table table-flush" id="datatable-basic">
+                                    <thead class="thead-light">
                                 <thead class="thead-light">
                                 <tr>
                                     <th scope="col" class="sort" data-sort="id">#</th>
