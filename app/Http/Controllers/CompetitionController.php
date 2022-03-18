@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Competition;
 use App\Models\OldCompetition;
+use App\Services\CompetitionService;
 use Illuminate\Http\Request;
 
 class CompetitionController extends Controller
@@ -49,9 +50,16 @@ class CompetitionController extends Controller
      */
     public function show(Competition $competition)
     {
-        $competition = $competition->load('equipes.gymnastes');
+        $competition = $competition;
 
-        return view('pages.competitions.show',compact('competition'));
+        $nav['parent']['title'] = "Compétitions";
+        $nav['parent']['url'] = route('competitions.index');
+        $nav['title']=$competition->ville. " ". $competition->old_date;
+
+        $niveaux = CompetitionService::niveaux($competition)->pluck('description','id');
+        $categories = CompetitionService::categories($competition)->pluck('description','id');
+
+        return view('pages.competitions.show',compact('competition','nav','niveaux','categories'));
     }
 
     /**

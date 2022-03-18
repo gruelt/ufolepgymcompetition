@@ -155,6 +155,8 @@ class ImportService
             $equipe->categorie_id = $categorie->id;
             $equipe->old_numEquipe = $oldEquipe->numEquipe;
             $equipe->competition_id = $competition->id;
+            $equipe->slug= $genre->name." ".$niveau->name." ".$categorie->name;
+            $equipe->code_categorie= $niveau->id.$categorie->age_min.$categorie->age_max.$genre->id;
 
             $equipe->save();
 

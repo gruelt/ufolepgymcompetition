@@ -3,7 +3,7 @@
 @section('content')
 
 @include('layouts.headers.spacer')
-
+{{--@include('layouts.headers.cards')--}}
 
 
 
@@ -13,6 +13,12 @@
     <div class="container-fluid mt--6">
         <div class="row">
             <div class="col">
+
+                <competition
+                    :competition="{{json_encode($competition)}}"
+                    :categories="{{json_encode($categories)}}"
+                    :niveaux = "{{json_encode($niveaux)}}"
+                ></competition>
 
 
 

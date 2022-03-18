@@ -10,4 +10,9 @@ class Niveau extends Model
     use HasFactory;
 
     protected $table ="niveaux";
+
+    public function equipes()
+    {
+        return $this->hasMany(Equipe::class);
+    }
 }

@@ -13,4 +13,23 @@ class Equipe extends Model
     {
         return $this->belongsToMany(Gymnaste::class);
     }
+
+    public function competition()
+    {
+        return $this->belongsTo(Competition::class);
+
+    }
+
+    public function categorie(){
+        return $this->belongsTo(Categorie::class);
+    }
+
+    public function niveau(){
+        return $this->belongsTo(Niveau::class);
+    }
+
+    public function genre(){
+        return $this->belongsTo(Genre::class);
+    }
+
 }

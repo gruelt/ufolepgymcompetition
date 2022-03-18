@@ -2,7 +2,21 @@
 <nav class="navbar navbar-top navbar-expand-md navbar-dark" id="navbar-main">
     <div class="container-fluid">
         <!-- Brand -->
-        <a class="h4 mb-0 text-white text-uppercase d-none d-lg-inline-block" href="{{ route('home') }}">{{ __('Dashboard') }}</a>
+{{--        <a class="h4 mb-0 text-white text-uppercase d-none d-lg-inline-block" href="{{ route('home') }}">{{ __('Dashboard') }}</a>--}}
+
+        @if(isset($nav['parent']))
+
+            <button class="btn btn-icon btn-3 btn-primary" type="button" href="{{$nav['parent']['url']}}>
+                <span class="btn-inner--icon"><i class="ni ni-bold-left"></i></span>
+
+                <span class="btn-inner--text">{{ $nav['parent']['title'] }}</span>
+
+            </button>
+        @endif
+        @if(isset($nav['title']))
+            <a class="h4 mb-0 text-white text-uppercase d-none d-lg-inline-block">{{ $nav['title'] }} </a>
+        @endif
+{{--        <a class="h3 mb-0 text-white text-uppercase d-none d-lg-inline-block" href="{{$nav['current']['url']}}">{{ __('Dashboard') }}</a>--}}
         <!-- Form -->
         <form class="navbar-search navbar-search-dark form-inline mr-3 d-none d-md-flex ml-lg-auto">
             <div class="form-group mb-0">
