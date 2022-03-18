@@ -23,6 +23,7 @@
                                     <th scope="col" class="sort" data-sort="nom">nom</th>
                                     <th scope="col" class="sort" data-sort="niveau">Niveau <br><input type="text"  v-model="filters.niveau" size="5"></th>
                                     <th scope="col">Genre</th>
+                                    <th scope="col">Categorie</th>
                                     <th scope="col">Individuel</th>
 
                                     <th scope="col">Code<br><input type="text"  v-model="filters.code_categorie" size="5"></th>
@@ -35,12 +36,13 @@
 
 
 
-                                <tr v-for="line in equipes">
+                                <tr v-for="line in filteredequipes">
 
                                     <td>{{line.id}}</td>
                                     <td>{{line.name}}</td>
                                     <td>{{line.niveau}}</td>
                                     <td>{{line.genre}}</td>
+                                    <td>{{line.categorie}}</td>
                                     <td>{{line.individuel}}</td>
 
                                     <td>{{line.code_categorie}}</td>
@@ -121,10 +123,25 @@ export default {
 
     data: function () {
         return {
-            equipes: {},
+            equipes: [],
             filters:{},
         }
     },
+
+    computed: {
+        filteredequipes() {
+            const filtered = this.equipes.filter(item => {
+                return Object.keys(this.filters).every(key =>
+                    String(item[key]).toLowerCase().includes(this.filters[key].toLowerCase()))
+            })
+            return filtered.length > 0 ? filtered : [{
+                id: '',
+                issuedBy: '',
+                issuedTo: ''
+            }]
+        },
+    },
+
 
     mounted() {
         console.log('Component mounted.')
