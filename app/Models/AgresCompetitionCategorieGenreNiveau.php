@@ -5,9 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class AgresCompetitionGymnasteNote extends Model
+class AgresCompetitionCategorieGenreNiveau extends Model
 {
     use HasFactory;
-
-    protected $table ='agres_competition_gymnaste_note';
 }

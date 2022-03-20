@@ -2,12 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\AgresCompetitionGymnaste;
-use App\Models\AgresCompetitionGymnasteNote;
-use App\Models\Gymnaste;
+use App\Models\AgresCompetitionCategorieGenreNiveau;
 use Illuminate\Http\Request;
 
-class GymnasteController extends Controller
+class AgresCompetitionCategorieGenreNiveauController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,8 +14,7 @@ class GymnasteController extends Controller
      */
     public function index()
     {
-        return AgresCompetitionGymnaste::first()->load('notes');
-        //return Gymnaste::find(5)->agresCompetition()->with('notes');
+        //
     }
 
     /**
@@ -44,10 +41,10 @@ class GymnasteController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Gymnaste  $gymnaste
+     * @param  \App\Models\AgresCompetitionCategorieGenreNiveau  $agresCompetitionCategorieGenreNiveau
      * @return \Illuminate\Http\Response
      */
-    public function show(Gymnaste $gymnaste)
+    public function show(AgresCompetitionCategorieGenreNiveau $agresCompetitionCategorieGenreNiveau)
     {
         //
     }
@@ -55,10 +52,10 @@ class GymnasteController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Gymnaste  $gymnaste
+     * @param  \App\Models\AgresCompetitionCategorieGenreNiveau  $agresCompetitionCategorieGenreNiveau
      * @return \Illuminate\Http\Response
      */
-    public function edit(Gymnaste $gymnaste)
+    public function edit(AgresCompetitionCategorieGenreNiveau $agresCompetitionCategorieGenreNiveau)
     {
         //
     }
@@ -67,10 +64,10 @@ class GymnasteController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Gymnaste  $gymnaste
+     * @param  \App\Models\AgresCompetitionCategorieGenreNiveau  $agresCompetitionCategorieGenreNiveau
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Gymnaste $gymnaste)
+    public function update(Request $request, AgresCompetitionCategorieGenreNiveau $agresCompetitionCategorieGenreNiveau)
     {
         //
     }
@@ -78,10 +75,10 @@ class GymnasteController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Gymnaste  $gymnaste
+     * @param  \App\Models\AgresCompetitionCategorieGenreNiveau  $agresCompetitionCategorieGenreNiveau
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Gymnaste $gymnaste)
+    public function destroy(AgresCompetitionCategorieGenreNiveau $agresCompetitionCategorieGenreNiveau)
     {
         //
     }

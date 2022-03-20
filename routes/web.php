@@ -41,5 +41,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('competitions',\App\Http\Controllers\CompetitionController::class);
 
     Route::resource('old-competitions',\App\Http\Controllers\OldCompetitionController::class);
+
+    Route::resource('gymnastes',\App\Http\Controllers\GymnasteController::class);
 });
 

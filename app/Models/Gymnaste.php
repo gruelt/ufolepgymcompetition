@@ -16,8 +16,12 @@ class Gymnaste extends Model
     public function equipes(){
         return $this->belongsToMany(Equipe::class);
     }
-    public function notes(){
-        return $this->belongsToMany(AgresCompetitionGymnaste::class,'agres_competition_gymnaste');
+
+    /** Returns all Agres strating notes for each competition
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function agresCompetition(){
+        return $this->hasMany(AgresCompetitionGymnaste::class);
     }
 
 
