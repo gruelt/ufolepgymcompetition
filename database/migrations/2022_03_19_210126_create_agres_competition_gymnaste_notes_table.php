@@ -16,9 +16,14 @@ return new class extends Migration
         Schema::create('agres_competition_gymnaste_notes', function (Blueprint $table) {
             $table->id();
             $table->integer('juge_id')->comment('Numero de juge');
+            $table->foreignId('agres_competition_gymnaste_id');
             $table->float('penalite');
             $table->string('status');
             $table->timestamps();
+        });
+
+        Schema::table('agres_competition_gymnaste',function (Blueprint $table){
+           $table->float('note_depart')->nullable();
         });
 
 
