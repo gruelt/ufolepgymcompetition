@@ -10,4 +10,9 @@ class AgresCompetitionGymnasteNote extends Model
     use HasFactory;
 
     protected $table ='agres_competition_gymnaste_note';
+
+    public function agresCompetitionGymnaste()
+    {
+        $this->belongsTo(AgresCompetitionGymnaste::class);
+    }
 }

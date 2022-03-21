@@ -11,7 +11,7 @@ class AgresCompetitionGymnaste extends Model
 
     protected $table="agres_competition_gymnaste";
 
-//    private function agresCompetitionNotes(){
+
     public function notes(){
         return $this->hasMany(AgresCompetitionGymnasteNote::class);
     }
