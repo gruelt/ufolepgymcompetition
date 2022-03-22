@@ -5,6 +5,8 @@
 
 
 
+
+
         <div class="container-fluid mt--6">
             <div class="row">
                 <div class="col">
@@ -27,7 +29,7 @@
                                     <th scope="col" class="sort" data-sort="niveau">Niveau <br><input type="text"  v-model="filters.niveau" size="5"></th>
                                     <th scope="col">Genre</th>
                                     <th scope="col">Categorie</th>
-                                    <th scope="col">Individuel</th>
+
 
                                     <th scope="col">Code<br><input type="text"  v-model="filters.code_categorie" size="5"></th>
 
@@ -42,17 +44,25 @@
                                 <tr v-for="line in filteredequipes">
 
                                     <td>{{line.id}}</td>
-                                    <td>{{line.name}}</td>
+                                    <td>{{line.name}}
+                                        <span v-if="line.individuel">Indiv</span>
+                                    </td>
                                     <td>{{line.niveau}}</td>
-                                    <td>{{line.genre}}</td>
+                                    <td>{{line.genre.name}}</td>
                                     <td>{{line.categorie}}</td>
-                                    <td>{{line.individuel}}</td>
+
 
                                     <td>{{line.code_categorie}}</td>
 
 
 
+
                                     <td>
+
+                                        <a v-for="agre in agres" :href="'equipes/'+ line.id + '/agres/'+ agre.id " v-if="agre.genre_id == line.genre.id">
+                                            {{agre.shortname}}
+                                        </a>
+
                                         <a class="btn btn-sm btn-success" :href="'equipes/'+ line.id " role="button" >
                                             What ?
                                         </a>
@@ -109,8 +119,9 @@
 
 <script>
 export default {
-    props:{
-      competition: []
+    props: {
+        competition: Object,
+        agres: Array,
     },
     methods:{
       test(){
@@ -148,6 +159,7 @@ export default {
 
     mounted() {
         console.log('Component mounted.')
+
         this.getEquipes();
     }
 }

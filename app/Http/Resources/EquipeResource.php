@@ -21,7 +21,7 @@ class EquipeResource extends JsonResource
             'code_categorie' => $this->code_categorie,
             'slug' => $this->slug,
             'genre' => $this->whenLoaded('genre', function () {
-                return $this->genre->name;
+                return $this->genre;
             }),
             'niveau' => $this->whenLoaded('niveau', function () {
                 return $this->niveau->name;

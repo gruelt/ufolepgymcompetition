@@ -1,7 +1,7 @@
 <template>
     <div className="container">
 
-        <equipes-competition :competition="competition"></equipes-competition>
+        <equipes-competition :competition="competition" :agres="agres"></equipes-competition>
 
 
 
@@ -60,6 +60,7 @@
 export default {
     props:{
         competition: {},
+        agres: {},
         niveaux: [],
         categories: []
     },

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Competition;
+use App\Models\Agres;
 use App\Models\OldCompetition;
 use App\Services\CompetitionService;
 use Illuminate\Http\Request;
@@ -58,8 +59,9 @@ class CompetitionController extends Controller
 
         $niveaux = CompetitionService::niveaux($competition)->pluck('description','id');
         $categories = CompetitionService::categories($competition)->pluck('description','id');
+        $agres = Agres::all();
 
-        return view('pages.competitions.show',compact('competition','nav','niveaux','categories'));
+        return view('pages.competitions.show',compact('competition','nav','agres'));
     }
 
     /**

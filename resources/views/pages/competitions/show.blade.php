@@ -16,13 +16,13 @@
 
                 <competition
                     :competition="{{json_encode($competition)}}"
-                    :categories="{{json_encode($categories)}}"
-                    :niveaux = "{{json_encode($niveaux)}}"
+                   :agres = "{{json_encode($agres)}}"
                 ></competition>
 
 
 
-                {{$competition}}
+{{--                {{$competition}}--}}
+                {{json_encode($agres)}}
 
 
             </div>
