@@ -6,7 +6,7 @@
 
         @if(isset($nav['parent']))
 
-            <button class="btn btn-icon btn-3 btn-primary" type="button" href="{{$nav['parent']['url']}}>
+            <a class="btn btn-icon btn-3 btn-primary" type="button" href="{{$nav['parent']['url']}}">
                 <span class="btn-inner--icon"><i class="ni ni-bold-left"></i></span>
 
                 <span class="btn-inner--text">{{ $nav['parent']['title'] }}</span>

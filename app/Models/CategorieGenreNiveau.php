@@ -8,4 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class CategorieGenreNiveau extends Model
 {
     use HasFactory;
+
+    protected $table = "categorie_genre_niveau";
 }

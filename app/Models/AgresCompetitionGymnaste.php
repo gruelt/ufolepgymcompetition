@@ -16,4 +16,6 @@ class AgresCompetitionGymnaste extends Model
         return $this->hasMany(AgresCompetitionGymnasteNote::class);
     }
 
+
+
 }

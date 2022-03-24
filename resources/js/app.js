@@ -37,6 +37,7 @@ Vue.component('old-competition-table', require('./components/OldCompetitionTable
 Vue.component('competition-table', require('./components/CompetitionTable.vue').default);
 Vue.component('competition', require('./components/Competition.vue').default);
 Vue.component('equipes-competition', require('./components/EquipesCompetitionTable.vue').default);
+Vue.component('agres-competition-equipe',require('./components/AgresEquipeCompetition').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

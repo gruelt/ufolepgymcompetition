@@ -38,7 +38,10 @@ Route::group(['middleware' => 'auth'], function () {
 	 Route::get('table-list', function () {return view('pages.tables');})->name('table');
 	Route::put('profile/password', ['as' => 'profile.password', 'uses' => 'App\Http\Controllers\ProfileController@password']);
     Route::get('old-competitions/{id}/import','App\Http\Controllers\OldCompetitionController@import')->name('oldcompetition.import');
+
+
     Route::resource('competitions',\App\Http\Controllers\CompetitionController::class);
+    Route::resource('competitions.equipes.agres',\App\Http\Controllers\AgresCompetitionEquipeController::class);
 
     Route::resource('old-competitions',\App\Http\Controllers\OldCompetitionController::class);
 

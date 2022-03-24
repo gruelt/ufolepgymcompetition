@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Models\Categorie;
+use App\Models\CategorieGenreNiveau;
 use App\Models\Club;
 use App\Models\Competition;
 use App\Models\Equipe;
@@ -144,6 +145,13 @@ class ImportService
                 $equipe = new Equipe;
 
 
+            }
+
+            $categorie_genre_niveau = CategorieGenreNiveau::where('genre_id',$genre->id)->where('niveau_id',$niveau->id)->where('categorie_id',$categorie->id);
+
+            if($categorie_genre_niveau->count() > 0 )
+            {
+                $equipe->categorie_genre_niveau_id = $categorie_genre_niveau->first()->id;
             }
 
             $equipe->name = $club->nom ."-".$oldEquipe->numeroEquipe;

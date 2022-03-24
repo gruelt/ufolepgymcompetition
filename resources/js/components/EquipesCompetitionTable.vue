@@ -59,7 +59,7 @@
 
                                     <td>
 
-                                        <a v-for="agre in agres" :href="'equipes/'+ line.id + '/agres/'+ agre.id " v-if="agre.genre_id == line.genre.id">
+                                        <a v-for="agre in agres" :href="competition.id + '/equipes/'+ line.id + '/agres/'+ agre.id " v-if="agre.genre_id == line.genre.id">
                                             {{agre.shortname}}
                                         </a>
 
