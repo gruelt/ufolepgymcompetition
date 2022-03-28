@@ -25,25 +25,28 @@
                 </tr>
 
 
-                <tr v-for="gymnaste in equipe.gymnastes">
+                <tr v-for="(gymnaste,index) in equipe.gymnastes">
 
-                    <td>{{gymnaste.nom}}</td>
+                    <td>{{gymnaste.nom}} </td>
                     <td> {{gymnaste.prenom}}</td>
                     <td>{{gymnaste.annee}}</td>
                     <td>{{gymnaste.licence}}</td>
                     <td>
-                        <span v-if="gymnaste.agres_competition[0]" >{{gymnaste.agres_competition[0].note_depart}}</span>
+                        <span v-if="gymnaste.agres_competition[0]" ><input size="3"  @keypress="navbykey($event,0,index)" :ref="'note_0_'+index" :value="gymnaste.agres_competition[0].note_depart"/></span>
+
                         <span v-else>
-                            0
+                            <input size="3" @keypress="navbykey($event,0,index)" :ref="'note_0_'+index" value=""/>
                         </span>
                     </td>
                     <td v-for="juge in juges.nb_juges">
                         <span v-if="gymnaste.agres_competition[0] && gymnaste.agres_competition[0].notes && gymnaste.agres_competition[0].notes[juge]">
-                            {{gymnaste.agres_competition[0].notes[juge].penalite}}
+<!--                            {{gymnaste.agres_competition[0].notes[juge].penalite}}-->
+                            <input size="3"  @keypress="navbykey($event,juge,index)" :ref="'note_'+ juge + '_'+ index" :value="gymnaste.agres_competition[0].notes[juge].penalite"/>
                         </span>
                         <span v-else>
-                            0
+                            <input size="3"  @keypress="navbykey($event,juge,index)" :ref="'note_'+ juge + '_'+ index" value=""/>
                         </span>
+
                     </td>
                 </tr>
             </table>
@@ -53,6 +56,7 @@
 
 <script>
 export default {
+
     props: {
         competition: Object,
         agres: Object,
@@ -60,6 +64,35 @@ export default {
         juges: Object
     },
     methods:{
+
+        navbykey: function (event, x , y)
+        {
+            // event.preventDefault();
+            console.log(event);
+            if(event.key=='Enter')
+            {
+                console.log(y );
+                console.log(this.$refs.note_1_1[0]);
+                // this.$refs.note_1_1[0].focus();
+
+                let coordX = x+1;
+                let coordY =  y;
+
+                if(coordX > this.juges.nb_juges)
+                {
+                    coordX = 0;
+                    coordY++;
+                    if(coordY > this.equipe.gymnastes.length-1)
+                    {
+                        coordY=0;
+                    }
+                }
+
+
+                this.$refs["note_" + coordX + "_" + coordY ][0].focus();
+
+            }
+        }
 
     },
 
