@@ -2,7 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Agres;
+use App\Models\AgresCompetitionGymnaste;
 use App\Models\AgresCompetitionGymnasteNote;
+use App\Models\Competition;
+use App\Models\Gymnaste;
 use Illuminate\Http\Request;
 
 class AgresCompetitionGymnasteNoteController extends Controller
@@ -24,7 +28,8 @@ class AgresCompetitionGymnasteNoteController extends Controller
      */
     public function create()
     {
-        //
+
+        return "okokaaa";
     }
 
     /**
@@ -33,9 +38,68 @@ class AgresCompetitionGymnasteNoteController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request ,$competition_id,$gymnaste_id , $agres_id)
     {
-        //
+
+
+
+        $acg = AgresCompetitionGymnaste::where('gymnaste_id',$gymnaste_id)
+            ->where('competition_id',$competition_id)
+            ->where('agres_id', $agres_id);
+
+        if($acg->count() <= 0)
+        {
+            $acg = new AgresCompetitionGymnaste;
+
+
+            $acg->gymnaste_id = $gymnaste_id;
+            $acg->competition_id = $competition_id;
+            $acg->agres_id = $agres_id;
+
+
+
+
+            $acg->save();
+        }
+        else{
+            $acg= $acg->first();
+        }
+
+        if($request->depart)
+        {
+            $acg->note_depart = $request->note;
+            $acg->save();
+        }
+        else{
+            $acgn = $acg->notes()->where('juge_id',$request->juge);
+
+            if($acgn->count() <= 0)
+            {
+                $acgn = new AgresCompetitionGymnasteNote();
+
+                $acgn->juge_id = $request->juge_id;
+
+                $acgn->agres_competition_gymnaste_id = $acg->id;
+
+                $acgn->status = 'wait_check';
+
+
+            }
+            else{
+                $acgn = $agcn->first();
+            }
+
+            $acgn->penalite = $request->note;
+
+            $acgn->save();
+
+        }
+
+
+
+        return "ok";
+
+
     }
 
     /**
@@ -69,7 +133,7 @@ class AgresCompetitionGymnasteNoteController extends Controller
      */
     public function update(Request $request, AgresCompetitionGymnasteNote $agresCompetitionGymnasteNote)
     {
-        //
+
     }
 
     /**

@@ -51,7 +51,7 @@ class AgresCompetitionEquipeController extends Controller
     {
         $nav['parent']['title'] = "Compétition";
         $nav['parent']['url'] = route('competitions.show',$competition->id);
-        $nav['title']="haha";
+        $nav['title']="Agrès";
 
         $agres=Agres::find($agres_id);
 
@@ -68,10 +68,19 @@ class AgresCompetitionEquipeController extends Controller
             $juges->categorie_genre_niveau_id = $equipe->categorie_genre_niveau_id;
 
             $juges->save();
+
+
+            $juges->refresh();
+
+            $gymnastes = $equipe->gymnastes()->get();
+
+
         }
         else{
             $juges = $agresCompetitionCategorieGenreNiveau->first();
         }
+
+
 
 
         $equipe = $equipe->load([

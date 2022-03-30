@@ -11,6 +11,9 @@ class AgresCompetitionGymnaste extends Model
 
     protected $table="agres_competition_gymnaste";
 
+    protected $fillable =
+        ['gymnaste_id'];
+
 
     public function notes(){
         return $this->hasMany(AgresCompetitionGymnasteNote::class);

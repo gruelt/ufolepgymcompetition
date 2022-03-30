@@ -25,3 +25,6 @@ Route::prefix('competitions')->group(function () {
         Route::get('/{id}/equipes','App\Http\Controllers\Api\CompetitionController@equipes');
 
 });
+
+Route::resource('competitions.gymnastes.agres.notes',\App\Http\Controllers\AgresCompetitionGymnasteNoteController::class);
+
