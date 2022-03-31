@@ -43,6 +43,7 @@ class AgresCompetitionGymnasteNoteController extends Controller
 
 
 
+        // To do  : put in Gymnaste Service
         $acg = AgresCompetitionGymnaste::where('gymnaste_id',$gymnaste_id)
             ->where('competition_id',$competition_id)
             ->where('agres_id', $agres_id);
@@ -71,13 +72,13 @@ class AgresCompetitionGymnasteNoteController extends Controller
             $acg->save();
         }
         else{
-            $acgn = $acg->notes()->where('juge_id',$request->juge);
+            $acgn = $acg->notes()->where('juge_id',$request->juge_id);
 
             if($acgn->count() <= 0)
             {
                 $acgn = new AgresCompetitionGymnasteNote();
 
-                $acgn->juge_id = $request->juge_id;
+                $acgn->juge_id = $request->juge_id ;
 
                 $acgn->agres_competition_gymnaste_id = $acg->id;
 
@@ -86,10 +87,18 @@ class AgresCompetitionGymnasteNoteController extends Controller
 
             }
             else{
-                $acgn = $agcn->first();
+                $acgn = $acgn->first();
             }
 
-            $acgn->penalite = $request->note;
+            if($request->note == "" || $request->note ==null)
+            {
+                print "nul note";
+                $acgn->penalite = null;
+            }
+            else{
+                $acgn->penalite = $request->note;
+
+            }
 
             $acgn->save();
 

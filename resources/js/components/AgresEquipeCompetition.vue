@@ -7,6 +7,7 @@
                  <h4> {{agres.name}} - {{juges.nb_juges}} Juges</h4>
 
 
+
             </div>
             <table>
 
@@ -41,12 +42,13 @@
                         </span>
                     </td>
                     <td v-for="juge in juges.nb_juges">
+                        {{juge}}
                         <span v-if="gymnaste.agres_competition[0] && gymnaste.agres_competition[0].notes && gymnaste.agres_competition[0].notes[juge]">
 <!--                            {{gymnaste.agres_competition[0].notes[juge].penalite}}-->
-                            <input size="3" @blur="setNote(index,agres.id,juge,false)" @keypress="navbykey($event,juge,index)" :ref="'note_'+ juge + '_'+ index" :value="gymnaste.agres_competition[0].notes[juge].penalite"/>
+                            <input size="3" @blur="setNote(index,agres.id,juge,false)" @keypress="navbykey($event,juge,index)" :ref="'note_'+ juge + '_'+ index" :value="gymnaste.agres_competition[0].notes[juge-1].penalite"/>
                         </span>
                         <span v-else>
-                            <input size="3" @blur="setNote(index,agres.id,juge,false)" @keypress="navbykey($event,juge,index)" :ref="'note_'+ juge + '_'+ index"/>
+                            <input size="3" @blur="setNote(index,agres.id,juge,false)" @keypress="navbykey($event,juge,index)" :ref="'note_'+ juge + '_'+ index" />
                         </span>
 
                     </td>
@@ -76,17 +78,17 @@ export default {
 
             let gymnaste_id = this.equipe.gymnastes[index].id;
             console.log('id' + gymnaste_id);
-
+            // TODO fix juge_id
             if(depart ==false) {
-                this.equipe.gymnastes[index].agres_competition[0].notes[juge] = this.$refs["note_" + juge + "_" + index][0].value;
-                note = this.equipe.gymnastes[index].agres_competition[0].notes[juge];
+                this.equipe.gymnastes[index].agres_competition[0].notes[juge-1] = this.$refs["note_" + juge + "_" + index][0].value;
+                note = this.equipe.gymnastes[index].agres_competition[0].notes[juge-1];
             }
             else
             {
                 this.equipe.gymnastes[index].agres_competition[0].note_depart = this.$refs["note_0_" + index][0].value;
                 note= this.equipe.gymnastes[index].agres_competition[0].note_depart;
             }
-            // console.log(this.$refs["note_" + juge + "_" + index][0].value)
+             console.log(note)
 
             axios.post('/api/competitions/'+ this.competition.id + '/gymnastes/' + gymnaste_id + '/agres/' + agres_id + '/notes/' , {
                 note: note,

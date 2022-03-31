@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Models\AgresCompetitionGymnaste;
 use App\Models\Categorie;
 use App\Models\CategorieGenreNiveau;
 use App\Models\Club;
@@ -19,12 +20,14 @@ class ImportService
         public $debug;
         public $saison;
 
+
         public function __construct($oldCompetition)
         {
 
             $this->oldCompetition = $oldCompetition;
             $this->debug = true;
             $this->saison = Saison::where('actuelle',1)->first();
+
         }
 
         public function log($data,$color="black")
@@ -92,7 +95,7 @@ class ImportService
                 {
 
 
-                    $gymnaste = $this->importGymnaste($oldGymnaste,$equipe);
+                    $gymnaste = $this->importGymnaste($oldGymnaste,$equipe,$competition);
 
 
 
@@ -172,7 +175,7 @@ class ImportService
 
         }
 
-        public function importGymnaste($oldgymnaste,$equipe)
+        public function importGymnaste($oldgymnaste,$equipe,$competition)
         {
                 $gymnaste = Gymnaste::where('licence',$oldgymnaste->licenceG);
 
@@ -196,6 +199,8 @@ class ImportService
                 $gymnaste->genre_id = $equipe->genre_id;
 
                 $gymnaste->save();
+
+                GymnasteService::initAgresCompetition($gymnaste,$competition);
 
 
 

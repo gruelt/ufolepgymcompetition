@@ -59,6 +59,7 @@ class AgresCompetitionEquipeController extends Controller
 
 
 
+
         if($agresCompetitionCategorieGenreNiveau->count() <= 0)
         {
             $juges = new AgresCompetitionCategorieGenreNiveau;
@@ -79,6 +80,7 @@ class AgresCompetitionEquipeController extends Controller
         else{
             $juges = $agresCompetitionCategorieGenreNiveau->first();
         }
+
 
 
 
