@@ -16,7 +16,7 @@ class AgresCompetitionGymnaste extends Model
 
 
     public function notes(){
-        return $this->hasMany(AgresCompetitionGymnasteNote::class);
+        return $this->hasMany(AgresCompetitionGymnasteNote::class)->orderBy('juge_id');
     }
 
 

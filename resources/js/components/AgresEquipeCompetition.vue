@@ -43,12 +43,12 @@
                     </td>
                     <td v-for="juge in juges.nb_juges">
                         {{juge}}
-                        <span v-if="gymnaste.agres_competition[0] && gymnaste.agres_competition[0].notes && gymnaste.agres_competition[0].notes[juge]">
-<!--                            {{gymnaste.agres_competition[0].notes[juge].penalite}}-->
+                        <span v-if="gymnaste.agres_competition[0] && gymnaste.agres_competition[0].notes && gymnaste.agres_competition[0].notes[juge-1]">
+
                             <input size="3" @blur="setNote(index,agres.id,juge,false)" @keypress="navbykey($event,juge,index)" :ref="'note_'+ juge + '_'+ index" :value="gymnaste.agres_competition[0].notes[juge-1].penalite"/>
                         </span>
                         <span v-else>
-                            <input size="3" @blur="setNote(index,agres.id,juge,false)" @keypress="navbykey($event,juge,index)" :ref="'note_'+ juge + '_'+ index" />
+                            <input size="3" @blur="setNote(index,agres.id,juge,false)" @keypress="navbykey($event,juge,index)" :ref="'note_'+ juge + '_'+ index" value="nada"/>
                         </span>
 
                     </td>
@@ -70,9 +70,9 @@ export default {
     methods:{
 
         setNote(index , agres_id , juge ,depart){
-            console.log(index);
-            console.log(agres_id);
-            console.log(juge);
+            console.log('index'+index);
+            console.log('agres'+agres_id);
+            console.log('juge' + juge);
             let note=0;
 
 
@@ -106,7 +106,7 @@ export default {
             console.log(event);
             if(event.key=='Enter')
             {
-                console.log(y );
+                console.log('position gym ' + y );
                 console.log(this.$refs.note_1_1[0]);
                 // this.$refs.note_1_1[0].focus();
 
