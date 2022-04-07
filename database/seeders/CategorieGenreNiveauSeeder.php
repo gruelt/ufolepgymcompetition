@@ -13,7 +13,7 @@ class CategorieGenreNiveauSeeder extends CsvSeeder
     {
         $this->file = '/database/seeders/csv/CategorieGenreNiveauSeeder.csv';
         $this->tablename = 'categorie_genre_niveau';
-        $this->delimiter = ',';
+        $this->delimiter = ';';
     }
 
 

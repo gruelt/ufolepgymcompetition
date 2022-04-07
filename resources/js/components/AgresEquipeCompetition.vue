@@ -42,13 +42,13 @@
                         </span>
                     </td>
                     <td v-for="juge in juges.nb_juges">
-                        {{juge}}
+
                         <span v-if="gymnaste.agres_competition[0] && gymnaste.agres_competition[0].notes && gymnaste.agres_competition[0].notes[juge-1]">
 
                             <input size="3" @blur="setNote(index,agres.id,juge,false)" @keypress="navbykey($event,juge,index)" :ref="'note_'+ juge + '_'+ index" :value="gymnaste.agres_competition[0].notes[juge-1].penalite"/>
                         </span>
                         <span v-else>
-                            <input size="3" @blur="setNote(index,agres.id,juge,false)" @keypress="navbykey($event,juge,index)" :ref="'note_'+ juge + '_'+ index" value="nada"/>
+                            <input size="3" @blur="setNote(index,agres.id,juge,false)" @keypress="navbykey($event,juge,index)" :ref="'note_'+ juge + '_'+ index" />
                         </span>
 
                     </td>
