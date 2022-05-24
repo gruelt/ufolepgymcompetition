@@ -16,5 +16,7 @@ class DatabaseSeeder extends Seeder
         $this->call([GenreSeeder::class]);
         $this->call([NiveauSeeder::class]);
         $this->call([SaisonSeeder::class]);
+        $this->call([AgresSeeder::class]);
+        $this->call([CategorieGenreNiveauSeeder::class]);
     }
 }

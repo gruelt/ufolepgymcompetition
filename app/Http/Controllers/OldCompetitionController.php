@@ -89,6 +89,7 @@ class OldCompetitionController extends Controller
     public function import($oldCompetitionId)
     {
         //print $oldCompetitionId;
+        set_time_limit(300);
         $oldCompetition = OldCompetition::find($oldCompetitionId);
         $ImportService = new ImportService($oldCompetition);
         $ImportService->import();
